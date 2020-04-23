@@ -5,7 +5,7 @@ In your terminal, make sure you cd to the correct repo
 
 Once you're in, run the following command:
 
-python twitter-manager.py
+python app.py
 
 This should launch the GUI. 
 
