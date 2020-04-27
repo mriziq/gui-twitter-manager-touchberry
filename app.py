@@ -1,14 +1,5 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'twitter_bot.ui'
-#
-# Created by: PyQt5 UI code generator 5.14.2
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import json
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -18,8 +9,11 @@ class Ui_Dialog(object):
         self.submitBtn.setGeometry(QtCore.QRect(260, 230, 113, 32))
         self.submitBtn.setObjectName("submitBtn")
         self.deleteBtn = QtWidgets.QPushButton(Dialog)
-        self.deleteBtn.setGeometry(QtCore.QRect(260, 260, 113, 32))
+        self.deleteBtn.setGeometry(QtCore.QRect(260, 280, 113, 32))
         self.deleteBtn.setObjectName("deleteBtn")
+        self.btn = QtWidgets.QPushButton(Dialog)
+        self.btn.setGeometry(QtCore.QRect(260, 260,113,32))
+        self.btn.setObjectName("btn")
         self.captionSelector = QtWidgets.QCheckBox(Dialog)
         self.captionSelector.setGeometry(QtCore.QRect(280, 170, 87, 20))
         self.captionSelector.setObjectName("captionSelector")
@@ -46,39 +40,136 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(translate("Dialog", "Touchberry Twitter Bot"))
         self.submitBtn.setText(translate("Dialog", "Submit"))
         self.deleteBtn.setText(translate("Dialog", "Delete"))
         self.captionSelector.setText(translate("Dialog", "Caption"))
         self.hashtagSelector.setText(translate("Dialog", "Hashtag"))
 
     def addText(self):
-        print("This button works!")
+        #ADD CAPTION
         if self.captionSelector.isChecked():
             caption = self.userInput.text()
-            self.captionDisplay.addItem(caption)
 
+            def write_json(data, filename='data.json'):
+                with open(filename, 'w') as f:
+                    json.dump(data, f)
+
+            with open('data.json') as json_file:
+                data = json.load(json_file)
+
+                temp = data['caption']
+
+                y = caption
+
+                temp.append(y)
+
+            write_json(data)
+
+            with open("data.json") as json_file:
+                data = json.load(json_file)
+                ui.captionDisplay.clear()
+
+                for captions in data["caption"]:
+                    ui.captionDisplay.addItem(captions)
+
+        #ADD HASHTAG
         elif self.hashtagSelector.isChecked():
             hashtag = self.userInput.text()
-            self.hashtagDisplay.addItem(hashtag)
+
+            def write_json(data, filename='data.json'):
+                with open(filename, 'w') as f:
+                    json.dump(data, f)
+
+            with open('data.json') as json_file:
+                data = json.load(json_file)
+
+                temp = data['hashtag']
+
+                y = hashtag
+
+                temp.append(y)
+
+            write_json(data)
+
+            with open("data.json") as json_file:
+                data = json.load(json_file)
+                ui.hashtagDisplay.clear()
+
+                for captions in data["hashtag"]:
+                    ui.hashtagDisplay.addItem(captions)
 
         else:
             print("No entry type selected.")
 
     def deleteCaption(self):
-        removable_caption = self.captionDisplay.currentRow()
-        self.captionDisplay.takeItem(removable_caption)
+
+        if self.captionSelector.isChecked():
+            removable_caption = self.captionDisplay.currentRow()
+
+            def write_json(data, filename='data.json'):
+                with open(filename, 'w') as f:
+                    json.dump(data, f)
+
+            with open('data.json') as json_file:
+                data = json.load(json_file)
+                temp = data['caption']
+                temp.pop(removable_caption)
+                print(temp)
+
+            write_json(data)
+
+            with open("data.json") as json_file:
+                data = json.load(json_file)
+                ui.captionDisplay.clear()
+
+                for captions in data["caption"]:
+                    ui.captionDisplay.addItem(captions)
+        else:
+            "Please select caption or hashtag to delete."
 
     def deleteHashtag(self):
-        removable_hashtag = self.hashtagDisplay.currentRow()
-        self.hashtagDisplay.takeItem(removable_hashtag)
+        if self.hashtagSelector.isChecked():
 
+            removable_hashtag = self.hashtagDisplay.currentRow()
+
+            def write_json(data, filename='data.json'):
+                with open(filename, 'w') as f:
+                    json.dump(data, f)
+
+            with open('data.json') as json_file:
+                data = json.load(json_file)
+                temp = data['hashtag']
+                temp.pop(removable_hashtag)
+                print(temp)
+
+            write_json(data)
+
+            with open("data.json") as json_file:
+                data = json.load(json_file)
+                ui.hashtagDisplay.clear()
+
+                for hashtags in data["hashtag"]:
+                    ui.hashtagDisplay.addItem(hashtags)
+        else:
+            "Please select caption or hashtag to delete."
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+    app.setWindowIcon(QtGui.QIcon('tb-logo.png'))
+
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
+    with open("data.json") as json_file:
+        data = json.load(json_file)
+
+        for captions in data["caption"]:
+            ui.captionDisplay.addItem(captions)
+
+        for hashtags in data["hashtag"]:
+            ui.hashtagDisplay.addItem(hashtags)
+
     sys.exit(app.exec_())
