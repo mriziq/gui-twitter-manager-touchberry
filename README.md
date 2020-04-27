@@ -9,22 +9,24 @@ python app.py
 
 This should launch the GUI. 
 
+To run the tweeter app, run:
+
+python tweeter.py
+
+This currently only runs a print statement for what owuld be the future Tweet, though this will be changed once Twitter gives us an AUTH token.
+
 
 **Future Functionality**<br>
 *Select random image and random caption<br>
-*Combine random items with a set of determined hashtags and the App Store page link<br>
-*Post the created tweet<br>
+~~*Combine random items with a set of determined hashtags and the App Store page link<br>~~
+~~*Post the created tweet<br>~~
 *If all graphics have been used, resort to liking posts that follow certain hashtags<br>
 *Perform routine "like runs"<br>
-*Caption and hashtag editting functionality<br>
+~~*Caption and hashtag editting functionality<br>~~
 
-
-**Currently**<br>
-*UI set up and tested<br>
-*Dependencies installed <br>
 
 **To-Do**<br>
 *Set up OS function for random image selection<br>
 *Set up and verify API configuration <br>
 ~~*Set up component connections to CRUD functions within UI<br>~~
-*Set up tweeting logic<br>
+~~*Set up tweeting logic<br>~~
