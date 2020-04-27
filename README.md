@@ -5,7 +5,7 @@ In your terminal, make sure you cd to the correct repo
 
 Once you're in, run the following command:
 
-python twitter-manager.py
+python app.py
 
 This should launch the GUI. 
 
@@ -26,5 +26,5 @@ This should launch the GUI.
 **To-Do**<br>
 *Set up OS function for random image selection<br>
 *Set up and verify API configuration <br>
-*Set up component connections to CRUD functions within UI<br>
+~~*Set up component connections to CRUD functions within UI<br>~~
 *Set up tweeting logic<br>
