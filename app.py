@@ -1,5 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QWidget
 import json
+import tweeter as st
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -9,11 +11,14 @@ class Ui_Dialog(object):
         self.submitBtn.setGeometry(QtCore.QRect(260, 230, 113, 32))
         self.submitBtn.setObjectName("submitBtn")
         self.deleteBtn = QtWidgets.QPushButton(Dialog)
-        self.deleteBtn.setGeometry(QtCore.QRect(260, 280, 113, 32))
+        self.deleteBtn.setGeometry(QtCore.QRect(260, 260, 113, 32))
         self.deleteBtn.setObjectName("deleteBtn")
         self.btn = QtWidgets.QPushButton(Dialog)
-        self.btn.setGeometry(QtCore.QRect(260, 260,113,32))
+        self.btn.setGeometry(QtCore.QRect(80, 260,113,32))
         self.btn.setObjectName("btn")
+        self.sendBtn = QtWidgets.QPushButton(Dialog)
+        self.sendBtn.setGeometry(QtCore.QRect(80, 235,113,32))
+        self.sendBtn.setObjectName("sendBtn")
         self.captionSelector = QtWidgets.QCheckBox(Dialog)
         self.captionSelector.setGeometry(QtCore.QRect(280, 170, 87, 20))
         self.captionSelector.setObjectName("captionSelector")
@@ -26,17 +31,22 @@ class Ui_Dialog(object):
         self.userInput.setObjectName("userInput")
 
         self.captionDisplay = QtWidgets.QListWidget(Dialog)
-        self.captionDisplay.setGeometry(QtCore.QRect(20, 20, 151, 141))
+        self.captionDisplay.setGeometry(QtCore.QRect(30, 20, 151, 141))
         self.captionDisplay.setObjectName("captionDisplay")
         self.hashtagDisplay = QtWidgets.QListWidget(Dialog)
         self.hashtagDisplay.setGeometry(QtCore.QRect(220, 20, 151, 141))
         self.hashtagDisplay.setObjectName("hashtagDisplay")
+        self.tweetDisplay = QtWidgets.QListWidget(Dialog)
+        self.tweetDisplay.setGeometry(QtCore.QRect(10, 180, 200, 20))
+        self.tweetDisplay.setObjectName("tweetDisplay")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         self.submitBtn.clicked.connect(self.addText)
         self.deleteBtn.clicked.connect(self.deleteCaption)
         self.deleteBtn.clicked.connect(self.deleteHashtag)
+        self.btn.clicked.connect(self.generateTweet)
+        self.sendBtn.clicked.connect(self.tweet)
 
     def retranslateUi(self, Dialog):
         translate = QtCore.QCoreApplication.translate
@@ -45,6 +55,8 @@ class Ui_Dialog(object):
         self.deleteBtn.setText(translate("Dialog", "Delete"))
         self.captionSelector.setText(translate("Dialog", "Caption"))
         self.hashtagSelector.setText(translate("Dialog", "Hashtag"))
+        self.btn.setText(translate("Dialog", "Generate"))
+        self.sendBtn.setText(translate("Dialog", "Tweet"))
 
     def addText(self):
         #ADD CAPTION
@@ -154,11 +166,21 @@ class Ui_Dialog(object):
         else:
             "Please select caption or hashtag to delete."
 
+    def generateTweet(self):
+        tweet = st.generateTweet()
+        tweet
+        ui.tweetDisplay.addItem(tweet)
+
+        return
+
+    def tweet():
+        st.tweet()
+        return
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     app.setWindowIcon(QtGui.QIcon('tb-logo.png'))
-
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)

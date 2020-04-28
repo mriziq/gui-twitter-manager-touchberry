@@ -5,13 +5,7 @@ import schedule
 import time
 
 
-def main():
-    #Authenticate to Twitter
-    auth = tweepy.OAuthHandler("CONSUMER_KEY", "CONSUMER_SECRET")
-    auth.set_access_token("ACCESS_TOKEN", "ACCESS_TOKEN_SECRET")
-
-    # Create API object
-    api = tweepy.API(auth)
+def generateTweet():
 
     emojis = [
         "\U0001F603",
@@ -42,6 +36,26 @@ def main():
         random_c = random.choice(list(c))
         random_h = random.choice(list(h))
         random_e = random.choice(emojis)
+        app_store_link = "https://t.co/ngEi1uD35X?amp=1"
+
+
+    return random_c + " " + random_e + " " + random_h + " " + app_store_link
+
+def tweet(self):
+    #Authenticate to Twitter
+
+    CONSUMER_KEY = "EiRndGUmpx7syXlhlbiUt1uyl"
+    CONSUMER_SECRET = "QpLo3v1tSDDciYT7m4QXRHngNV1ZAfttBtJiHP5yMTqga3Avzm"
+    ACCESS_TOKEN = "1240809774842662912-12M4kZjpUcPzCtKClPzNgvboJhwYqH"
+    ACCESS_TOKEN_SECRET = "bQxbdJ4ELNT0muTvpKoC7v9kZ1IYuj8tutgGXEGrNF2CS"
+
+
+
+    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+
+    # Create API object
+    api = tweepy.API(auth)
 
     #API Auth verifification
     try:
@@ -50,15 +64,14 @@ def main():
     except:
         print("Error during authentication")
 
+    return
 
-    print((random_c + " " + random_e + " " + random_h))
+# schedule.every(5).seconds.do(main)
+#
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
 
-schedule.every(5).seconds.do(main)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
-    
 
 if __name__ == '__main__':
     main()
