@@ -7,13 +7,6 @@ Once you're in, run the following command:
 
 python app.py
 
-This should launch the GUI. 
-
-To run the tweeter app, run:
-
-python tweeter.py
-
-This currently only runs a print statement for what owuld be the future Tweet, though this will be changed once Twitter gives us an AUTH token.
 
 **Current Functionality**<br>
 *Add/Delete successfully stored captions and hashtags<br>
