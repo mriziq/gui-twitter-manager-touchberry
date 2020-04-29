@@ -13,18 +13,24 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(400, 300)
+
         self.submitBtn = QtWidgets.QPushButton(Dialog)
-        self.submitBtn.setGeometry(QtCore.QRect(260, 230, 113, 32))
+        self.submitBtn.setGeometry(QtCore.QRect(115, 230, 113, 32))
         self.submitBtn.setObjectName("submitBtn")
         self.deleteBtn = QtWidgets.QPushButton(Dialog)
-        self.deleteBtn.setGeometry(QtCore.QRect(260, 260, 113, 32))
+        self.deleteBtn.setGeometry(QtCore.QRect(115, 260, 113, 32))
         self.deleteBtn.setObjectName("deleteBtn")
         self.btn = QtWidgets.QPushButton(Dialog)
-        self.btn.setGeometry(QtCore.QRect(80, 260,113,32))
+        self.btn.setGeometry(QtCore.QRect(10, 260,113,32))
         self.btn.setObjectName("btn")
         self.sendBtn = QtWidgets.QPushButton(Dialog)
-        self.sendBtn.setGeometry(QtCore.QRect(80, 235,113,32))
+        self.sendBtn.setGeometry(QtCore.QRect(10, 230,113,32))
         self.sendBtn.setObjectName("sendBtn")
+        self.autopilotBtn = QtWidgets.QPushButton(Dialog)
+        self.autopilotBtn.setCheckable(True)
+        self.autopilotBtn.setGeometry(QtCore.QRect(220, 230, 100, 32))
+        self.autopilotBtn.setObjectName("autopilotBtn")
+
         self.captionSelector = QtWidgets.QCheckBox(Dialog)
         self.captionSelector.setGeometry(QtCore.QRect(280, 170, 87, 20))
         self.captionSelector.setObjectName("captionSelector")
@@ -32,8 +38,9 @@ class Ui_Dialog(object):
         self.hashtagSelector.setGeometry(QtCore.QRect(280, 200, 87, 20))
         self.hashtagSelector.setObjectName("hashtagSelector")
 
+
         self.userInput = QtWidgets.QLineEdit(Dialog)
-        self.userInput.setGeometry(QtCore.QRect(10, 210, 251, 21))
+        self.userInput.setGeometry(QtCore.QRect(10, 200, 251, 21))
         self.userInput.setObjectName("userInput")
 
         self.captionDisplay = QtWidgets.QListWidget(Dialog)
@@ -43,7 +50,7 @@ class Ui_Dialog(object):
         self.hashtagDisplay.setGeometry(QtCore.QRect(220, 20, 151, 141))
         self.hashtagDisplay.setObjectName("hashtagDisplay")
         self.tweetDisplay = QtWidgets.QListWidget(Dialog)
-        self.tweetDisplay.setGeometry(QtCore.QRect(10, 180, 200, 20))
+        self.tweetDisplay.setGeometry(QtCore.QRect(10, 170, 200, 20))
         self.tweetDisplay.setObjectName("tweetDisplay")
 
         self.retranslateUi(Dialog)
@@ -53,16 +60,18 @@ class Ui_Dialog(object):
         self.deleteBtn.clicked.connect(self.deleteHashtag)
         self.btn.clicked.connect(Twitter.generateTweet)
         self.sendBtn.clicked.connect(Twitter.post_tweet)
+        self.autopilotBtn.clicked.connect(Twitter.autopilot)
 
     def retranslateUi(self, Dialog):
         translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(translate("Dialog", "Touchberry Twitter Bot"))
-        self.submitBtn.setText(translate("Dialog", "Submit"))
-        self.deleteBtn.setText(translate("Dialog", "Delete"))
+        self.submitBtn.setText(translate("Dialog", "Add"))
+        self.deleteBtn.setText(translate("Dialog", "Remove"))
+        self.autopilotBtn.setText(translate("Dialog", "Autopilot"))
         self.captionSelector.setText(translate("Dialog", "Caption"))
         self.hashtagSelector.setText(translate("Dialog", "Hashtag"))
         self.btn.setText(translate("Dialog", "Generate"))
-        self.sendBtn.setText(translate("Dialog", "Tweet"))
+        self.sendBtn.setText(translate("Dialog", "Post"))
 
     def addText(self):
         #ADD CAPTION
@@ -172,9 +181,9 @@ class Ui_Dialog(object):
         else:
             "Please select caption or hashtag to delete."
 
-
 class Twitter():
     def generateTweet():
+        ui.tweetDisplay.clear()
 
         emojis = [
             "\U0001F603",
@@ -202,12 +211,20 @@ class Twitter():
 
             c = data["caption"]
             h = data["hashtag"]
+
             random_c = random.choice(list(c))
             random_h = random.choice(list(h))
+            random_h2 = random.choice(list(h))
+            random_h3 = random.choice(list(h))
             random_e = random.choice(emojis)
             app_store_link = "https://t.co/ngEi1uD35X?amp=1"
         global content
-        content = random_c + " " + random_e + " " + random_h + " "+app_store_link
+        content = random_c + " " + random_e + " " + random_h + " "+random_h2+" "+random_h3+" "+app_store_link
+
+        # Checking for duplicates, if found, restart function?
+        # for posts in data["postedTweets"]:
+        #     if content == posts:
+        #         break
 
         ui.tweetDisplay.addItem(content)
         return content
@@ -235,14 +252,33 @@ class Twitter():
             print("Error during authentication")
 
         api.update_status(content)
+
+        def write_json(data, filename='data.json'):
+            with open(filename, 'w') as f:
+                json.dump(data, f)
+
+        with open('data.json') as json_file:
+            data = json.load(json_file)
+            temp = data['postedTweets']
+            temp.append(content)
+
+        write_json(data)
         return
 
     def post_tweet():
         x = content
-        print(x)
         Twitter.update_status(x)
         ui.tweetDisplay.clear()
 
+    def autopilot():
+        print("Under Construction")
+        # if ui.autopilotBtn.isChecked():
+        #     Twitter.generateTweet()
+        #     Twitter.post_tweet()
+        #
+        # else:
+        #     print("NOTHING")
+        return
 
 if __name__ == "__main__":
     import sys

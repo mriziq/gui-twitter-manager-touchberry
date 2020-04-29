@@ -9,6 +9,9 @@ python app.py
 
 To generate a tweet, simply click 'Generate', review the tweet in the display, and send it off by clicking 'Tweet'.
 
+**IMPORTANT:**<br>
+There must be at least 3 distinct hashtags to avoid duplicate hashtags in tweets.
+
 
 **Current Functionality**<br>
 *Add/Delete successfully stored captions and hashtags<br>
