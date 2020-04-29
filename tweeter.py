@@ -38,10 +38,11 @@ def generateTweet():
         random_e = random.choice(emojis)
         app_store_link = "https://t.co/ngEi1uD35X?amp=1"
 
+        content = random_c + " " + random_e + " " + random_h + " "+app_store_link
 
-    return random_c + " " + random_e + " " + random_h + " " + app_store_link
+    return content
 
-def tweet(self):
+def update_status(content):
     #Authenticate to Twitter
 
     CONSUMER_KEY = "EiRndGUmpx7syXlhlbiUt1uyl"
@@ -56,13 +57,14 @@ def tweet(self):
 
     # Create API object
     api = tweepy.API(auth)
-
     #API Auth verifification
     try:
         api.verify_credentials()
         print("Authentication OK")
     except:
         print("Error during authentication")
+
+    api.update_status(tweet)
 
     return
 
@@ -72,6 +74,7 @@ def tweet(self):
 #     schedule.run_pending()
 #     time.sleep(1)
 
-
+#Debugging and Testing
 if __name__ == '__main__':
-    main()
+    x = generateTweet()
+    update_status(x)
