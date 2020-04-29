@@ -7,7 +7,7 @@ Once you're in, run the following command:
 
 python app.py
 
-To generate a tweet, simply click 'Generate', review the tweet in the display, and send it off by clicking 'Tweet'.
+To generate a tweet, simply click 'Generate', review the tweet in the display, and send it off by clicking 'Tweet'. Load the bot with captions and hashtags. Hardcoded is also a set of emojis relevant to our brand and used by our audience frequently.
 
 
 **Current Functionality**<br>
