@@ -50,7 +50,7 @@ class Ui_Dialog(object):
         self.hashtagDisplay.setGeometry(QtCore.QRect(220, 20, 151, 141))
         self.hashtagDisplay.setObjectName("hashtagDisplay")
         self.tweetDisplay = QtWidgets.QListWidget(Dialog)
-        self.tweetDisplay.setGeometry(QtCore.QRect(10, 170, 200, 20))
+        self.tweetDisplay.setGeometry(QtCore.QRect(10, 170, 260, 20))
         self.tweetDisplay.setObjectName("tweetDisplay")
 
         self.retranslateUi(Dialog)
@@ -270,15 +270,30 @@ class Twitter():
         Twitter.update_status(x)
         ui.tweetDisplay.clear()
 
-    def autopilot():
-        print("Under Construction")
+
+    def autopilot_tweet():
         # if ui.autopilotBtn.isChecked():
-        #     Twitter.generateTweet()
-        #     Twitter.post_tweet()
-        #
+        Twitter.generateTweet()
+        Twitter.post_tweet()
+
         # else:
         #     print("NOTHING")
         return
+
+    def autopilot():
+        if ui.autopilotBtn.isChecked():
+
+            print("triggered")
+            Twitter.autopilot_tweet
+            schedule.every(10).hours.do(Twitter.autopilot_tweet)
+            # schedule.every(10).seconds.do(Twitter.autopilot_tweet)
+            ui.tweetDisplay.addItem("AUTOPILOTING TWEETS EVERY 10 HOURS.")
+            while True:
+                schedule.run_pending()
+        else:
+            ui.tweetDisplay.clear()
+            print("Autopilot OFF.")
+            return
 
 if __name__ == "__main__":
     import sys
@@ -296,5 +311,5 @@ if __name__ == "__main__":
 
         for hashtags in data["hashtag"]:
             ui.hashtagDisplay.addItem(hashtags)
-
+    # schedule.run_pending()
     sys.exit(app.exec_())
