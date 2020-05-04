@@ -7,22 +7,16 @@ Once you're in, run the following command:
 
 python app.py
 
-To generate a tweet, simply click 'Generate', review the tweet in the display, and send it off by clicking 'Tweet'. Load the bot with captions and hashtags. Hardcoded is also a set of emojis relevant to our brand and used by our audience frequently.
+**Setting Captions and Hashtags**
+To add a caption/hashtag, check the relevant box, type the entry, and click Add. To delete an item, click on the selection, check the relevant box, and click Delete. The bot will use the set of hashtags in its auto-liking feature. Emojis are pre-loaded into the tweet generator.
 
-Press autoilot to generate and post tweet every 10 hours, and CMD + . to kill in terminal.
+**Generating a Tweet Manually*
+To generate a tweet, simply click 'Generate', review the tweet in the display, and send it off by clicking 'Tweet'.
+
+**Autopilot**
+Press autopilot to generate and post tweet every 10 hours, and CMD + . to kill in terminal. KEEP APP RUNNING TO KEEP THE CONNECTION ALIVE. Does not work unless running.
+
+Press Auto-Liking to tell the bot to like 100 tweets posted today, containing a hashtag from our database.
 
 **IMPORTANT:**<br>
 There must be at least 3 distinct hashtags to avoid duplicate hashtags in tweets.
-
-
-**Current Functionality**<br>
-*Add/Delete successfully stored captions and hashtags<br>
-*Generate and post tweets.<br>
-
-**To-Do**<br>
-*Add safeguards against duplicate tweets<br>
-*Setup scheduling (2x a day, morning and evening in the UK)<br>
-*Set up OS function for random image selection<br>
-~~*Set up and verify API configuration <br>~~
-~~*Set up component connections to CRUD functions within UI<br>~~
-~~*Set up tweeting logic<br>~~

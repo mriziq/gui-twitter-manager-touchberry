@@ -6,6 +6,8 @@ import random
 import json
 import schedule
 import time
+from config import create_api
+from datetime import date
 
 
 
@@ -30,6 +32,10 @@ class Ui_Dialog(object):
         self.autopilotBtn.setCheckable(True)
         self.autopilotBtn.setGeometry(QtCore.QRect(220, 230, 100, 32))
         self.autopilotBtn.setObjectName("autopilotBtn")
+        self.autoLikeBtn = QtWidgets.QPushButton(Dialog)
+        self.autoLikeBtn.setCheckable(True)
+        self.autoLikeBtn.setGeometry(QtCore.QRect(220,260,100,32))
+        self.autoLikeBtn.setObjectName("autoLikeBtn")
 
         self.captionSelector = QtWidgets.QCheckBox(Dialog)
         self.captionSelector.setGeometry(QtCore.QRect(280, 170, 87, 20))
@@ -59,6 +65,7 @@ class Ui_Dialog(object):
         self.deleteBtn.clicked.connect(self.deleteCaption)
         self.deleteBtn.clicked.connect(self.deleteHashtag)
         self.btn.clicked.connect(Twitter.generateTweet)
+        self.autoLikeBtn.clicked.connect(Twitter.autoLike)
         self.sendBtn.clicked.connect(Twitter.post_tweet)
         self.autopilotBtn.clicked.connect(Twitter.autopilot)
 
@@ -72,6 +79,7 @@ class Ui_Dialog(object):
         self.hashtagSelector.setText(translate("Dialog", "Hashtag"))
         self.btn.setText(translate("Dialog", "Generate"))
         self.sendBtn.setText(translate("Dialog", "Post"))
+        self.autoLikeBtn.setText(translate("Dialog", "Auto-Like"))
 
     def addText(self):
         #ADD CAPTION
@@ -218,38 +226,22 @@ class Twitter():
             random_h3 = random.choice(list(h))
             random_e = random.choice(emojis)
             app_store_link = "https://t.co/ngEi1uD35X?amp=1"
-        global content
-        content = random_c + " " + random_e + " " + random_h + " "+random_h2+" "+random_h3+" "+app_store_link
+            global content
+            content = random_c + " " + random_e + " " + random_h + " "+random_h2+" "+random_h3+" "+app_store_link
 
-        # Checking for duplicates, if found, restart function?
-        # for posts in data["postedTweets"]:
-        #     if content == posts:
-        #         break
+            temp = data['postedTweets']
+            if temp.count(temp) > 1:
+                content = None
+                ui.tweetDisplay.addItem("Tweet already posted. Generate a new one.")
+            else:
+                pass
 
         ui.tweetDisplay.addItem(content)
         return content
 
     def update_status(content):
-        #Authenticate to Twitter
 
-        CONSUMER_KEY = "EiRndGUmpx7syXlhlbiUt1uyl"
-        CONSUMER_SECRET = "QpLo3v1tSDDciYT7m4QXRHngNV1ZAfttBtJiHP5yMTqga3Avzm"
-        ACCESS_TOKEN = "1240809774842662912-12M4kZjpUcPzCtKClPzNgvboJhwYqH"
-        ACCESS_TOKEN_SECRET = "bQxbdJ4ELNT0muTvpKoC7v9kZ1IYuj8tutgGXEGrNF2CS"
-
-
-
-        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-        auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-
-        # Create API object
-        api = tweepy.API(auth)
-        #API Auth verifification
-        try:
-            api.verify_credentials()
-            print("Authentication OK")
-        except:
-            print("Error during authentication")
+        api = create_api()
 
         api.update_status(content)
 
@@ -258,9 +250,11 @@ class Twitter():
                 json.dump(data, f)
 
         with open('data.json') as json_file:
+
             data = json.load(json_file)
             temp = data['postedTweets']
             temp.append(content)
+
 
         write_json(data)
         return
@@ -282,18 +276,41 @@ class Twitter():
 
     def autopilot():
         if ui.autopilotBtn.isChecked():
+            ui.tweetDisplay.addItem("AUTOPILOTING TWEETS EVERY 10 HOURS.")
 
             print("triggered")
-            Twitter.autopilot_tweet
-            schedule.every(10).hours.do(Twitter.autopilot_tweet)
+            run = Twitter.autopilot_tweet
+
+            schedule.every(10).hours.do(run)
             # schedule.every(10).seconds.do(Twitter.autopilot_tweet)
-            ui.tweetDisplay.addItem("AUTOPILOTING TWEETS EVERY 10 HOURS.")
             while True:
                 schedule.run_pending()
         else:
             ui.tweetDisplay.clear()
             print("Autopilot OFF.")
             return
+
+    def autoLike():
+        api = create_api()
+        today = date.today()
+        try:
+            if ui.autoLikeBtn.isChecked():
+                with open('data.json') as json_file:
+                    data = json.load(json_file)
+                    temp = data['hashtag']
+                for i in temp:
+                    i = random.choice(temp)
+                    print(i)
+                    for tweet in tweepy.Cursor(api.search,q=i,count=100,
+                                       lang="en", until=today).items():
+                        since_id = tweet
+                        api.create_favorite(tweet.id)
+            else:
+                print("AUTO-LIKE IS OFF.")
+        except:
+            pass
+        return
+
 
 if __name__ == "__main__":
     import sys
