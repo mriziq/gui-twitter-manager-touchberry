@@ -1,4 +1,8 @@
-# twitter-manager-touchberry
+# twitter-manager-touchberry<br>
+
+**Installation**<br>
+pip install -r requirements.txt (Python 2)
+pip3 install -r requirements.txt (Python 3)
 
 **Running the app** <br>
 In your terminal, make sure you cd to the correct repo
