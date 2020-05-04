@@ -10,7 +10,7 @@ python app.py
 **Setting Captions and Hashtags**<br>
 To add a caption/hashtag, check the relevant box, type the entry, and click Add. To delete an item, click on the selection, check the relevant box, and click Delete. The bot will use the set of hashtags in its auto-liking feature. Emojis are pre-loaded into the tweet generator.
 
-**Generating a Tweet Manually*<br>
+**Generating a Tweet Manually**<br>
 To generate a tweet, simply click 'Generate', review the tweet in the display, and send it off by clicking 'Tweet'.
 
 **Autopilot**<br>
