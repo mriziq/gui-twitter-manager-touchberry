@@ -71,7 +71,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(translate("Dialog", "Touchberry Twitter Bot"))
+        Dialog.setWindowTitle(translate("Dialog", "Touchberry Twitter Bot: @plantstoryapp"))
         self.submitBtn.setText(translate("Dialog", "Add"))
         self.deleteBtn.setText(translate("Dialog", "Remove"))
         self.autopilotBtn.setText(translate("Dialog", "Autopilot"))
