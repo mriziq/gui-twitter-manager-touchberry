@@ -5,10 +5,6 @@ pip install -r requirements.txt (Python 2)<br>
 pip3 install -r requirements.txt (Python 3)
 
 **Running the app** <br>
-In your terminal, make sure you cd to the correct repo
-
-Once you're in, run the following command:
-
 python app.py
 
 **Setting Captions and Hashtags**<br>
