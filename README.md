@@ -1,7 +1,7 @@
 # twitter-manager-touchberry<br>
 
 **Installation**<br>
-pip install -r requirements.txt (Python 2)
+pip install -r requirements.txt (Python 2)<br>
 pip3 install -r requirements.txt (Python 3)
 
 **Running the app** <br>
