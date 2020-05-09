@@ -229,12 +229,12 @@ class Twitter():
             global content
             content = random_c + " " + random_e + " " + random_h + " "+random_h2+" "+random_h3+" "+app_store_link
 
-            temp = data['postedTweets']
-            if temp.count(temp) > 1:
-                content = None
-                ui.tweetDisplay.addItem("Tweet already posted. Generate a new one.")
-            else:
-                pass
+        if data['postedTweets'].count(content) > 0:
+            print(content)
+            content = None
+            ui.tweetDisplay.addItem("Tweet already posted. Generate a new one.")
+        else:
+            pass
 
         ui.tweetDisplay.addItem(content)
         return content
@@ -280,7 +280,7 @@ class Twitter():
 
             print("triggered")
             run = Twitter.autopilot_tweet
-
+            run()
             schedule.every(10).hours.do(run)
             # schedule.every(10).seconds.do(Twitter.autopilot_tweet)
             while True:
