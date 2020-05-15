@@ -20,3 +20,5 @@ Press Auto-Liking to tell the bot to like 100 tweets posted today, containing a 
 
 **IMPORTANT:**<br>
 There must be at least 3 distinct hashtags to avoid duplicate hashtags in tweets.
+
+Visit <a href="https://docs.google.com/document/d/1pDtGN6FB9lRU6e_WI2-DlwFCBg4rOWROhXiDPJgEu6U/edit?usp=sharing">the user instructions</a> for a guide on how to use.
