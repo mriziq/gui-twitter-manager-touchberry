@@ -70,6 +70,7 @@ class Twitter: This classes uses _data.json_ to randomly generate a tweet, initi
 *autopilot function:*<br>
 - If autopilot button is pressed, run auto_pilot tweet on a schedule of every 7 hours.<br>
 
+<br>
 *autoLike function:*<br>
 - initial API<br>
 - if Auto Like button is clicked, load json hashtags<br>
