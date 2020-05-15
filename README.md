@@ -43,7 +43,7 @@ class UI_Dialog: All UI components live in here, as well as the connectors for b
 * If the corresping check box is selected, and an item is click selected, this fuction reads and removes hashtags in data.json.<br>
 
 <br>
-class Twitter: This classes uses _data.json_ to randomly generate a tweet, initialize the Twitter API, post tweets, and execute likes.
+class Twitter: This classes uses _data.json_ to randomly generate a tweet, initialize the Twitter API, post tweets, and execute likes.<br>
 
 <br>
 *generateTweet* function:<br>
