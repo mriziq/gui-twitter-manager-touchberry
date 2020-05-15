@@ -23,7 +23,7 @@ There must be at least 3 distinct hashtags to avoid duplicate hashtags in tweets
 
 Visit <a href="https://docs.google.com/document/d/1pDtGN6FB9lRU6e_WI2-DlwFCBg4rOWROhXiDPJgEu6U/edit?usp=sharing">the user instructions</a> for a guide on how to use.
 
-**Code Walkthrough**<br>
+# Code Walkthrough <br>
 
 _app.py_<br>
 
@@ -31,46 +31,46 @@ class UI_Dialog: All UI components live in here, as well as the connectors for b
 <br>
 
 <br>
-*addText* function<br>
-* If the correpsonding checkbox is selected, this functon will read and write to data.json either a caption or hashtag.<br>
+_addText function:_<br>
+* If the corresponding checkbox is selected, this function will read and write to data.json either a caption or hashtag.<br>
 
 <br>
-*deleteCapiton* function<br>
-* If the corresping check box is selected, and an item is click selected, this fuction reads and removes captions in data.json.<br>
+_deleteCapiton function:_<br>
+* If the corresponding check box is selected, and an item is click selected, this function reads and removes captions in data.json.<br>
 
 <br>
-*deleteHashtag function*<br>
-* If the corresping check box is selected, and an item is click selected, this fuction reads and removes hashtags in data.json.<br>
+_deleteHashtag function:_<br>
+* If the corresponding check box is selected, and an item is click selected, this function reads and removes hashtags in data.json.<br>
 
 <br>
 class Twitter: This classes uses _data.json_ to randomly generate a tweet, initialize the Twitter API, post tweets, and execute likes.<br>
 
 <br>
-*generateTweet* function:<br>
+_generateTweet function:_<br>
 * Reads data.json<br>
 * Generates tweet by concatinating caption + emoji + 3 hashtags + a download link<br>
 * Checks if the generated caption is duplicated, if so, clears tweet and alerts user.<br>
 * returns generated tweet in 'content', which is used in update_status.<br>
 
 <br>
-*update_status* function:<br>
+_update_status function_<br>
 * initialze API<br>
 * Posts 'content'<br>
 * Saves posted tweets to data.json <br>
 
 <br>
-*post_tweet* function:<br>
+_post_tweet function_<br>
 * Manual execution of tweeting using in autopilot_tweet<br>
 
 <br>
-*autopilot_tweet* function: <br>
+_autopilot tweet function_ <br>
 * Generates tweet, then posts tweet<br>
 
 <br>
-*autopilot* function:
+_autopilot function:_
 * If autopilot button is pressed, run auto_pilot tweet on a schedule of every 7 hours.<br>
 
-*autoLike* function:
+_autoLike function:_
 * initial API<br>
 * if Auto Like button is clicked, load json hashtags<br>
 * Like 100 tweets posted until today, containing a random hashtag from our loaded json<br>
