@@ -281,7 +281,7 @@ class Twitter():
             print("triggered")
             run = Twitter.autopilot_tweet
             run()
-            schedule.every(10).hours.do(run)
+            schedule.every(7).hours.do(run)
             # schedule.every(10).seconds.do(Twitter.autopilot_tweet)
             while True:
                 schedule.run_pending()
