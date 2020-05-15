@@ -75,7 +75,6 @@ _autoLike function:_
 * if Auto Like button is clicked, load json hashtags<br>
 * Like 100 tweets posted until today, containing a random hashtag from our loaded json<br>
 <br>
-<br>
 _config.py_<br>
 Authenticates and returns API object with Consumer Keys and Access Tokens from @plantstoryID's Twitter Dev Portal.<br>
 
