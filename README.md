@@ -25,7 +25,7 @@ Visit <a href="https://docs.google.com/document/d/1pDtGN6FB9lRU6e_WI2-DlwFCBg4rO
 
 # Code Walkthrough <br>
 
-_app.py_<br>
+*app.py*<br>
 
 class UI_Dialog: All UI components live in here, as well as the connectors for buttons and functions.
 <br>
