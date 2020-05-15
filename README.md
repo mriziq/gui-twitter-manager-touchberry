@@ -75,7 +75,7 @@ _autoLike function:_
 * if Auto Like button is clicked, load json hashtags<br>
 * Like 100 tweets posted until today, containing a random hashtag from our loaded json<br>
 
-**Model Schema for data.json**<br>
+## Model Schema for data.json <br>
 <br>
 {"caption":[],<br>
  "hashtag":[],<br>
